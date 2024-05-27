@@ -32,15 +32,17 @@ func SideChannelAttack(hashFunction func(string) string, presision ...int) (atRi
 		repeat = presision[0]
 	}
 
+	shortLength := 16
 	shortTime := make([]time.Duration, repeat)
 	for i := range repeat {
-		shortTime[i] = measureTiming(hashFunction, RandomString(16))
+		shortTime[i] = measureTiming(hashFunction, RandomString(shortLength))
 	}
 	midShortTime := calculateAverage(shortTime)
 
+	longLength := 128
 	longTime := make([]time.Duration, repeat)
 	for i := range repeat {
-		longTime[i] = measureTiming(hashFunction, RandomString(64))
+		longTime[i] = measureTiming(hashFunction, RandomString(longLength))
 	}
 	midLongTime := calculateAverage(longTime)
 
